@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-require_once 'config/database.php';
-require_once 'admin/scripts/read.php';
+include_once 'load.php';
 
 if(isset($_GET['filter'])){
     //filtering movies
