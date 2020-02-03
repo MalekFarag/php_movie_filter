@@ -1,8 +1,6 @@
 <header>
-    <a href="index.php">Netflix 2.0</a>
-
-
-    <nav>
+    <h2>This is the Header</h2>
+    <nav class="filterNav">
         <ul>
             <li><a href="index.php?filter=action">Action</a></li>
             <li><a href="index.php?filter=comedy">Comedy</a></li>

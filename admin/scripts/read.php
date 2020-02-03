@@ -1,42 +1,53 @@
-<?php 
-function getAll($tbl){
-    $pdo = Database::getInstance()->getconnection();
-    $queryAll = 'SELECT * FROM '.$tbl;
+<?php
+
+function getAll($tbl)
+{
+    $pdo = Database::getInstance()->getConnection();
+    $queryAll = 'SELECT * FROM ' . $tbl;
     $results = $pdo->query($queryAll);
 
-    if($results){
+    if ($results) {
         return $results;
-    }else{
-        return 'There was an error.';
+    } else {
+        return 'There was a problem accessing this info';
     }
 }
 
-function getSingleMovie($tbl, $col, $id){
-    //getAll function but only take the clicked id
-    $pdo = Database::getInstance()->getconnection();
-    //$querySingle = 'SELECT * FROM '.$tbl.' WHERE id='.$col;
-    $querySingle = 'SELECT * FROM '.$tbl.' WHERE '.$col.'='.$id;
-    $results = $pdo->query($querySingle);
+function getSingleMovie($tbl, $col, $id)
+{
+    //TODO: finish the function based on getAll, this time only return
+    // one movie's fields
 
-    if($results){
-        return $results;
-    }else{
-        return 'There was an error.';
-    }
-}
-
-function getMoviesByFilter($args){
     $pdo = Database::getInstance()->getConnection();
-    $filterQuery = 'SELECT * FROM '.$args['tbl1'].' AS t, '.$args['tbl2'].' AS t2, '.$args['tbl3'].' AS t3';
-    $filterQuery .= ' WHERE t.'.$args['col1'].' = t3.'.$args['col1'];
-    $filterQuery .= ' AND t2.'.$args['col2'].' = t3.'.$args['col2'];
-    $filterQuery .= ' AND t2.'.$args['col3'].' = "'.$args['filter'].'"';
+    // $query = 'SELECT * FROM '.$tbl.' WHERE '$col' = '.$id;
+    $query = "SELECT * FROM $tbl WHERE $col = $id";
+    $results = $pdo->query($query);
 
+    if ($results) {
+        return $results;
+    } else {
+        return 'There was a problem accessing this info';
+    }
+
+}
+
+function getMoviesByFilter($args)
+{
+    $pdo = Database::getInstance()->getConnection();
+
+    $filterQuery = 'SELECT * FROM ' . $args['tbl'] . ' AS t, ' . $args['tbl2'] . ' AS t2, ' . $args['tbl3'] . ' AS t3';
+    $filterQuery .= ' WHERE t.' . $args['col'] . ' = t3.' . $args['col'];
+    $filterQuery .= ' AND t2.' . $args['col2'] . ' = t3.' . $args['col2'];
+    $filterQuery .= ' AND t2.' . $args['col3'] . ' = "' . $args['filter'] . '"';
 
     $results = $pdo->query($filterQuery);
-    if($results){
+
+    echo $filterQuery;
+    exit;
+
+    if ($results) {
         return $results;
-    }else{
-        return 'There was an error.';
+    } else {
+        return 'There was a problem accessing this info';
     }
 }

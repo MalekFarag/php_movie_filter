@@ -1,15 +1,12 @@
 <?php
-ini_set('display_errors', 1);
-require_once 'config/database.php';
-require_once 'admin/scripts/read.php';
+require_once 'load.php';
 
-if(isset($_GET['id'])){
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $tbl = 'tbl_movies';
     $col = 'movies_id';
     $getMovie = getSingleMovie($tbl, $col, $id);
 }
-
 
 ?>
 
@@ -22,20 +19,18 @@ if(isset($_GET['id'])){
     <title>Details</title>
 </head>
 <body>
+    <?php include 'templates/header.php';?>
+    <?php if (!is_string($getMovie)): ?>
+        <?php while ($row = $getMovie->fetch(PDO::FETCH_ASSOC)): ?>
+            <img src="images/<?php echo $row['movies_cover']; ?>" alt="<?php echo $row['movies_title'] ?>" />
 
-<?php include_once 'templates/header.php'; ?>
-    <?php if(!is_string($getMovie)):?>
-        <?php while($row = $getMovie->fetch(PDO::FETCH_ASSOC)):?>
-            <img src="images/<?php echo $row['movies_cover'];?>" alt="<?php echo $row['movies_title'];?>">
-            
-            <h2>Name: <?php echo $row['movies_title'];?></h2>
-            <h4>Year: <?php echo $row['movies_year'];?></h4>
-            <p>Story: <?php echo $row['movies_storyline'];?></p>
-            <a href="index.php">Go back...</a>
-        <?php endwhile; ?>
-    <?php endif; ?>
+            <h2>Name: <?php echo $row['movies_title']; ?></h2>
+            <h4>Year: <?php echo $row['movies_year']; ?></h4>
+            <p>Story:<br> <?php echo $row['movies_storyline']; ?></p>
+            <a href="index.php">Back...</a>
+        <?php endwhile;?>
+    <?php endif;?>
 
-
-    <?php include_once 'templates/footer.php'; ?>
+    <?php include 'templates/footer.php';?>
 </body>
 </html>

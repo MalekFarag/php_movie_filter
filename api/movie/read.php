@@ -8,7 +8,7 @@ include_once '../../config/database.php';
 include_once '../objects/movie.php';
 
 // instantiate database and movie object
-$db = Database::getInstance()->getConnection();
+$db       = Database::getInstance()->getConnection();
 
 // initialize object
 $movie = new Movie($db);

@@ -1,1 +1,1 @@
-<footer><br><p>copyright Netflix 2.0 <?php echo date('Y');?></p></footer>
+<footer>This is the NEW footer <br> Copyright <?php echo date('Y'); ?></footer>
