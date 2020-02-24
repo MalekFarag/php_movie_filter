@@ -1,5 +1,6 @@
 <?php 
     require_once '../load.php';
+    confirm_logged_in();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +11,10 @@
     <title>Admin Dashboard</title>
 </head>
 <body>
-    <h2>Welcome admin</h2>
+    <h2>Welcome, <?php echo $_SESSION['user_name']; ?></h2>
+
+
+    <a href="admin_createuser.php">Signup</a>
+    <a href="admin_logout.php">Logout</a>
 </body>
 </html>
