@@ -25,9 +25,57 @@ function createuser($fname, $username, $email, $password){
     }
     //if user created successfully redirect to index.php
     //need error catch****
-
     
+    return $message;
+}
 
-    
+function getSingleUser($id){
+    $pdo = Database::getInstance()->getConnection();
+    // fetch current user
+
+    $get_user_query = "SELECT * FROM tbl_user WHERE user_id = :id";
+    $get_user_set = $pdo->prepare($get_user_query);
+    $get_user_res = $get_user_set->execute(
+        array(
+            ':id'=>$id
+        )
+    );
+
+    //edit user res is a boolean value
+        // used for error catching****
+    if($get_user_res){
+        $user = $get_user_set;
+    }else{
+        $user = 'error';
+    }
+
+    return $user;
+}
+
+function editUser($id, $fname, $username, $password, $email){
+    $pdo = Database::getInstance()->getConnection();
+    // fetch current user
+
+    $edit_user_query = "UPDATE tbl_user SET user_fname = :fname, user_name = :username, user_pass = :password, user_email = :email WHERE user_id = :id";
+    $edit_user_set = $pdo->prepare($edit_user_query);
+    $edit_user_res = $edit_user_set->execute(
+        array(
+            ':id'=>$id,
+            ':fname'=>$fname,
+            ':username'=>$username,
+            ':password'=>$password,
+            ':email'=>$email
+        )
+    );
+
+    //edit user res is a boolean value
+        // used for error catching****
+    if($edit_user_res){
+        $message = 'user updated';
+        redirect_to('index.php');
+    }else{
+        $message = 'error updating user';
+    }
+
     return $message;
 }

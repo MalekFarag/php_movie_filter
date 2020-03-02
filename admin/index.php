@@ -16,5 +16,6 @@
 
     <a href="admin_createuser.php">Signup</a>
     <a href="admin_logout.php">Logout</a>
+    <a href="admin_edituser.php">Edit User</a>
 </body>
 </html>
