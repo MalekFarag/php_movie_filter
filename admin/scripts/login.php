@@ -54,7 +54,6 @@ function login($username, $password, $ip){
         $message = 'user doesnt exist';
     }
 
-    return $message;
 }
 
 function confirm_logged_in(){

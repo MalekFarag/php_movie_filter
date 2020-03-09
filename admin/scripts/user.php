@@ -79,3 +79,30 @@ function editUser($id, $fname, $username, $password, $email){
 
     return $message;
 }
+
+function getAllUsers($current_user){
+
+    $pdo = Database::getInstance()->getConnection();
+
+    $query = "SELECT * FROM tbl_user WHERE user_id != $current_user";
+    $results = $pdo->query($query);
+
+    if ($results) {
+        return $results;
+    } else {
+        return 'There was a problem accessing this info';
+    }
+}
+
+function deleteUser($user_id){
+    $pdo = Database::getInstance()->getConnection();
+    $query = "DELETE FROM tbl_user WHERE user_id = $user_id"; // ****prepare here (need change)*****
+
+    $delete_user = $pdo->query($query);
+
+    if($delete_user && $delete_user->rowCount() === 1){ //counting how many rows affected
+       redirect_to('admin_deleteuser.php'); 
+    }else{
+        return 'there has been an error deleting the user';
+    }
+}
